@@ -181,7 +181,7 @@ def main():
 
     # merge frames to video
     if args.video:
-        video_save_path = os.path.join(args.output, f'{video_name}_{args.suffix}.mp4')
+        video_save_path = /content/drive/Shareddrives/ReserveDisk/{video_name}_{args.suffix}.mp4
         if args.audio:
             os.system(
                 f'ffmpeg -r {args.fps} -i {save_frame_folder}/frame%08d_out.{extension} -i {args.input}'
@@ -191,7 +191,7 @@ def main():
                       f'-c:v libx264 -r {args.fps} -b 10M -pix_fmt yuv420p {video_save_path}')
 
         # delete tmp file
-        # shutil.rmtree(save_frame_folder)
+        shutil.rmtree(save_frame_folder)
         if os.path.isdir(frame_folder):
             shutil.rmtree(frame_folder)
 
