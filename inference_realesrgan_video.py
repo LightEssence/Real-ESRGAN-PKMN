@@ -103,7 +103,7 @@ def main():
             bg_upsampler=upsampler)
     os.makedirs(args.output, exist_ok=True)
     # for saving restored frames
-    save_frame_folder = os.path.join(args.output, 'frames_tmpout')
+    save_frame_folder = os.path.join('frames_tmpout')
     os.makedirs(save_frame_folder, exist_ok=True)
 
     if mimetypes.guess_type(args.input)[0].startswith('video'):  # is a video file
@@ -156,14 +156,14 @@ def main():
             print('Error', error)
             print('If you encounter CUDA out of memory, try to set --tile with a smaller number.')
 
-       # else:
-       #     if args.ext == 'auto':
-       #         extension = extension[1:]
-       #     else:
-       #         extension = args.ext
-       #     if img_mode == 'RGBA':  # RGBA images should be saved in png format
-       #         extension = 'png'
-       #     save_path = os.path.join(save_frame_folder, f'{imgname}_out.{extension}')
+        else:
+            if args.ext == 'auto':
+                extension = extension[1:]
+            else:
+                extension = args.ext
+            if img_mode == 'RGBA':  # RGBA images should be saved in png format
+                extension = 'png'
+            save_path = os.path.join(save_frame_folder, f'{imgname}_out.{extension}')
 
        #     que.put({'output': output, 'save_path': save_path})
 
