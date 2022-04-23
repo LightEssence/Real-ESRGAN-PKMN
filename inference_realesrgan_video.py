@@ -156,16 +156,16 @@ def main():
             print('Error', error)
             print('If you encounter CUDA out of memory, try to set --tile with a smaller number.')
 
-        else:
-            if args.ext == 'auto':
-                extension = extension[1:]
-            else:
-                extension = args.ext
-            if img_mode == 'RGBA':  # RGBA images should be saved in png format
-                extension = 'png'
-            save_path = os.path.join(save_frame_folder, f'{imgname}_out.{extension}')
+       # else:
+       #     if args.ext == 'auto':
+       #         extension = extension[1:]
+       #     else:
+       #         extension = args.ext
+       #     if img_mode == 'RGBA':  # RGBA images should be saved in png format
+       #         extension = 'png'
+       #     save_path = os.path.join(save_frame_folder, f'{imgname}_out.{extension}')
 
-            que.put({'output': output, 'save_path': save_path})
+       #     que.put({'output': output, 'save_path': save_path})
 
         pbar.update(1)
         torch.cuda.synchronize()
@@ -181,7 +181,7 @@ def main():
 
     # merge frames to video
     if args.video:
-        video_save_path = os.path.join(content/drive/Shareddrives/ReserveDisk/{video_name}-out.mp4)
+        video_save_path = os.path.join(args.output, f'{video_name}_{args.suffix}.mp4')
         if args.audio:
             os.system(
                 f'ffmpeg -r {args.fps} -i {save_frame_folder}/frame%08d_out.{extension} -i {args.input}'
