@@ -103,7 +103,7 @@ def main():
             bg_upsampler=upsampler)
     os.makedirs(args.output, exist_ok=True)
     # for saving restored frames
-    save_frame_folder = os.path.join('frames_tmpout')
+    save_frame_folder = os.path.join(args.output, 'frames_tmpout')
     os.makedirs(save_frame_folder, exist_ok=True)
 
     if mimetypes.guess_type(args.input)[0].startswith('video'):  # is a video file
@@ -185,10 +185,10 @@ def main():
         if args.audio:
             os.system(
                 f'ffmpeg -r {args.fps} -i {save_frame_folder}/frame%08d_out.{extension} -i {args.input}'
-                f' -map 0:v:0 -map 1:a:0 -c:a copy -c:v libx264 -r {args.fps} -b 10M -pix_fmt yuv420p  {video_save_path}')
+                f' -map 0:v:0 -map 1:a:0 -c:a copy -c:v libx264 -r {args.fps} -b 10M -pix_fmt yuv420p  f'/content/drive/Shareddrives/ReserveDisk/{video_name}_{args.suffix}.mp4'')
         else:
             os.system(f'ffmpeg -r {args.fps} -i {save_frame_folder}/frame%08d_out.{extension}'
-                      f'-c:v libx264 -r {args.fps} -b 10M -pix_fmt yuv420p {video_save_path}')
+                      f'-c:v libx264 -r {args.fps} -b 10M -pix_fmt yuv420p f'/content/drive/Shareddrives/ReserveDisk/{video_name}_{args.suffix}.mp4'')
 
         # delete tmp file
         shutil.rmtree(save_frame_folder)
