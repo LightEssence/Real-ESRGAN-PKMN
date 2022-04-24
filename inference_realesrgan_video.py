@@ -103,7 +103,7 @@ def main():
             bg_upsampler=upsampler)
     os.makedirs(args.output, exist_ok=True)
     # for saving restored frames
-    save_frame_folder = os.path.join(args.output, 'frames_tmpout')
+    save_frame_folder = os.path.join('frames_tmpout')
     os.makedirs(save_frame_folder, exist_ok=True)
 
     if mimetypes.guess_type(args.input)[0].startswith('video'):  # is a video file
