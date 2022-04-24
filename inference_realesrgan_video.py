@@ -103,7 +103,7 @@ def main():
             bg_upsampler=upsampler)
     os.makedirs(args.output, exist_ok=True)
     # for saving restored frames
-    save_frame_folder = os.path.join(args.output, 'frames_tmpout')
+    save_frame_folder = os.path.join('frames_tmpout')
     os.makedirs(save_frame_folder, exist_ok=True)
 
     if mimetypes.guess_type(args.input)[0].startswith('video'):  # is a video file
@@ -181,7 +181,7 @@ def main():
 
     # merge frames to video
     if args.video:
-        video_save_path = os.path.join("/content/drive/Shareddrives/ReserveDisk/", f'{video_name}_{args.suffix}.mp4')
+        video_save_path = os.path.join(args.output, f'{video_name}_{args.suffix}.mp4')
         if args.audio:
             os.system(
                 f'ffmpeg -r {args.fps} -i {save_frame_folder}/frame%08d_out.{extension} -i {args.input}'
