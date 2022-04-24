@@ -191,7 +191,7 @@ def main():
                       f'-c:v libx264 -r {args.fps} -b 10M -pix_fmt yuv420p {video_save_path}')
 
         # delete tmp file
-        shutil.rmtree(save_frame_folder)
+        #shutil.rmtree(save_frame_folder)
         if os.path.isdir(frame_folder):
             shutil.rmtree(frame_folder)
 
