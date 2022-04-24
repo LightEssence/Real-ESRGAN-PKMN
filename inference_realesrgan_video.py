@@ -103,7 +103,7 @@ def main():
             bg_upsampler=upsampler)
     os.makedirs(args.output, exist_ok=True)
     # for saving restored frames
-    save_frame_folder = os.path.join(args.output,'frames_tmpout')
+    save_frame_folder = os.path.join(args.output, 'frames_tmpout')
     os.makedirs(save_frame_folder, exist_ok=True)
 
     if mimetypes.guess_type(args.input)[0].startswith('video'):  # is a video file
@@ -165,7 +165,7 @@ def main():
                 extension = 'png'
             save_path = os.path.join(save_frame_folder, f'{imgname}_out.{extension}')
 
-       #     que.put({'output': output, 'save_path': save_path})
+            que.put({'output': output, 'save_path': save_path})
 
         pbar.update(1)
         torch.cuda.synchronize()
@@ -185,13 +185,13 @@ def main():
         if args.audio:
             os.system(
                 f'ffmpeg -r {args.fps} -i {save_frame_folder}/frame%08d_out.{extension} -i {args.input}'
-                f' -map 0:v:0 -map 1:a:0 -c:a copy -c:v libx264 -r {args.fps} -b 10M -pix_fmt yuv420p {video_save_path}')
+                f' -map 0:v:0 -map 1:a:0 -c:a copy -c:v libx264 -r {args.fps} -pix_fmt yuv420p  {video_save_path}')
         else:
-            os.system(f'ffmpeg -r {args.fps} -i {save_frame_folder}/frame%08d_out.{extension}'
-                      f'-c:v libx264 -r {args.fps} -b 10M -pix_fmt yuv420p {video_save_path}')
+            os.system(f'ffmpeg -r {args.fps} -i {save_frame_folder}/frame%08d_out.{extension} '
+                      f'-c:v libx264 -r {args.fps} -pix_fmt yuv420p {video_save_path}')
 
         # delete tmp file
-        #shutil.rmtree(save_frame_folder)
+        shutil.rmtree(save_frame_folder)
         if os.path.isdir(frame_folder):
             shutil.rmtree(frame_folder)
 
