@@ -183,11 +183,11 @@ def main():
         video_save_path = os.path.join(args.output, f'{video_name}_{args.suffix}.mp4')
         if args.audio:
             os.system(
-                f'ffmpeg -r {args.fps} -i {save_frame_folder}/frame%08d_out.{extension} -i {frame_folder}/frame%08d.png -i {args.input}'
+                f'ffmpeg {args.fps} -i {save_frame_folder}/frame%08d_out.{extension} -i {frame_folder}/frame%08d.png -i {args.input}'
                 f'-filter_complex "[1:v]format=argb,geq=r='r(X,Y)':a='0.5*alpha(X,Y)'[a]; [a]scale=1440x1080[b];[0:v][b]overlay"'
                 f'-map 2:a:0 -c:a copy -c:v libx264 -r {args.fps} -b 10M -pix_fmt yuv420p  {video_save_path}')
         else:
-            os.system(f'ffmpeg -r {args.fps} -i {save_frame_folder}/frame%08d_out.{extension} -i {frame_folder}/frame%08d.png'
+            os.system(f'ffmpeg {args.fps} -i {save_frame_folder}/frame%08d_out.{extension} -i {frame_folder}/frame%08d.png'
                       f'-filter_complex "[1:v]format=argb,geq=r='r(X,Y)':a='0.5*alpha(X,Y)'[a]; [a]scale=1440x1080[b];[0:v][b]overlay"'
                       f'-c:v libx264 -r {args.fps}-b 10M -pix_fmt yuv420p {video_save_path}')
 
